@@ -3,63 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <title>Roleta Pokémon</title>
-  <link rel="stylesheet" href="style.css"> <!-- Referência ao CSS -->
+  <link rel="stylesheet" href="./style.css"> <!-- Referência ao CSS -->
 </head>
 <body class="poke">
 
-<!-- As 5 Pokébolas clicáveis para mudar os temas -->
-<div class="theme-toggle">
-  <img src="imgs/poke.png" alt="Pokébola Normal" class="pokebola-icon theme-pokebola" onclick="mudarTema('poke')" />
-  <img src="imgs/ultra.png" alt="Ultra Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('ultra')" />
-  <img src="imgs/great.png" alt="Great Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('great')" />
-  <img src="imgs/gs.png" alt="GS Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('gs')" />
-  <img src="imgs/master.png" alt="Master Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('master')" />
-</div>
+  <!-- Pokébolas para mudar os temas -->
+  <div class="theme-toggle">
+    <img src="./imgs/poke.png" alt="Pokébola Normal" class="pokebola-icon theme-pokebola" onclick="mudarTema('poke')" />
+    <img src="./imgs/ultra.png" alt="Ultra Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('ultra')" />
+    <img src="./imgs/great.png" alt="Great Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('great')" />
+    <img src="./imgs/gs.png" alt="GS Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('gs')" />
+    <img src="./imgs/master.png" alt="Master Ball" class="pokebola-icon theme-pokebola" onclick="mudarTema('master')" />
+  </div>
 
-<div class="container">
-  <div class="roletaContainer" id="roletaContainer">
-    <!-- Substituímos a div do ponteiro por uma imagem -->
-    <img id="ponteiroImagem" src="imgs/ponteiro.png" alt="Ponteiro da Roleta" class="ponteiro-imagem" />
-    <canvas id="roleta" width="500" height="500" class="roleta-canvas"></canvas>
-    <div class="resultado">
-      <p id="nomePokemon" class="nome-pokemon"></p> <!-- O nome do Pokémon será mostrado após o giro -->
-      <img id="imagemPokemon" src="imgs/telainicial.png" alt="Pokémon" class="tela-inicial-capa imagem-pokemon" />
-      <div class="pokebutton">
-        <button id="girarButton" onclick="girarRoleta()">GIRAR</button>
+  <div class="container">
+    <div class="roletaContainer" id="roletaContainer">
+      <!-- Ponteiro da Roleta -->
+      <img id="ponteiroImagem" src="./imgs/ponteiro.png" alt="Ponteiro da Roleta" class="ponteiro-imagem" />
+      <canvas id="roleta" width="500" height="500" class="roleta-canvas"></canvas>
+      <div class="resultado">
+        <p id="nomePokemon" class="nome-pokemon"></p>
+        <img id="imagemPokemon" src="./imgs/telainicial.png" alt="Pokémon" class="tela-inicial-capa imagem-pokemon" />
+        <div class="pokebutton">
+          <button id="girarButton" onclick="girarRoleta()">GIRAR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pokedex">
+      <div class="pokedex-screen">
+        <h2>Como Usar</h2>
+        <p><strong>1️⃣</strong> Clique em <strong>"Girar"</strong> para girar a roleta.</p>
+        <p><strong>2️⃣</strong> Veja qual Pokémon será sorteado!</p>
+        <p><strong>3️⃣</strong> Corra para capturá-lo no tempo limite de 1 hora!</p>
+        <p><strong>4️⃣</strong> Boa sorte e divirta-se no mundo Pokémon!</p>
       </div>
     </div>
   </div>
 
-<div class="pokedex">
-  <div class="pokedex-screen">
-    <!-- Remover a linha abaixo que exibe a Pokébola -->
-    <!-- <img id="iconePokebola" class="pokedex-capa" src="imgs/telainicial.png" alt="Capa" /> -->
-    <h2>Como Usar</h2>
-    <p><strong>1️⃣</strong> Clique em <strong>"Girar"</strong> para girar a roleta.</p>
-    <p><strong>2️⃣</strong> Veja qual Pokémon será sorteado!</p>
-    <p><strong>3️⃣</strong> Corra para capturá-lo no tempo limite de 1 hora!</p>
-    <p><strong>4️⃣</strong> Boa sorte e divirta-se no mundo Pokémon!</p>
-  </div>
-</div>
-<!-- Div para a Pokébola que altera o tema -->
-<div class="theme-toggle">
-  <img id="iconePokebola" class="pokebola-icon theme-pokebola" src="imgs/poke.png" alt="Pokébola Normal" onclick="mudarTema('poke')" />
-<div class="theme-toggle">
-  <img src="imgs/poke.png" alt="poke" class="pokebola-icon theme-pokebola" onclick="mudarTema('poke')" />
-  <img src="imgs/ultra.png" alt="ultra" class="pokebola-icon theme-pokebola" onclick="mudarTema('ultra')" />
-  <img src="imgs/great.png" alt="great" class="pokebola-icon theme-pokebola" onclick="mudarTema('great')" />
-  <img src="imgs/gs.png" alt="gs" class="pokebola-icon theme-pokebola" onclick="mudarTema('gs')" />
-  <img src="imgs/master.png" alt="master" class="pokebola-icon theme-pokebola" onclick="mudarTema('master')" />
-</div>
+  <!-- Áudios -->
+  <audio id="somRoleta" src="./sons/click.mp3" preload="auto"></audio>
+  <audio id="somVitoria" src="./sons/applause.mp3" preload="auto"></audio>
+  <audio id="somPokemon" preload="auto"></audio>
 
-</div>
-
-</div>
-
-<audio id="somRoleta" src="sons/click.mp3" preload="auto"></audio>
-<audio id="somVitoria" src="sons/applause.mp3" preload="auto"></audio>
-<audio id="somPokemon" preload="auto"></audio>
-
-<script src="script.js"></script> <!-- Referência ao JavaScript -->
+  <!-- JavaScript -->
+  <script src="./script.js"></script>
 </body>
 </html>
