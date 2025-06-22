@@ -1,0 +1,659 @@
+/* Fonte Bungalo adicionada através do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+/* Carregando as fontes personalizadas da pasta "fonts" */
+@font-face {
+  font-family: 'PokemonSolid';
+  src: url('fonts/pokemon_solid.ttf') format('truetype'); /* Fonte "pokemon_solid" */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PokemonHollow';
+  src: url('fonts/pokemon_hollow.ttf') format('truetype'); /* Fonte "pokemon_hollow" */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Fonte personalizada para o botão "Girar" */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); /* Fonte "Bangers" mais grossa para o botão "Girar" */
+
+* { 
+  box-sizing: border-box; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif; /* Usando a fonte "Roboto" para o corpo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  background-color: #f1f1f1; /* Tema claro */
+  color: #000;
+  flex-direction: column;
+}
+
+body.ultra {
+  background-color: #222; /* Tema ultra: preto  */
+  color: #fff;
+}
+
+body.gs {
+  background-color: #f0f000; /* Tema gs fundo amarelo */
+  color: #fff;
+}
+
+body.great {
+  background-color: blue; /* Tema azul great */
+  color: #fff;
+}
+
+body.poke {
+  background-color: #e53935; /* Tema poke vermelho */
+  color: #fff;
+}
+
+body.master {
+  background-color: #70014b; /* Cor roxa (base) */
+  color: #fff; /* Texto roxo master */
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.theme-toggle button {
+  background: linear-gradient(145deg, #ccc, #fff);
+  border: 3px solid #999;
+  color: #333;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-family: 'PokemonSolid', cursive; /* Fonte "PokemonSolid" para o botão "Tema" */
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, transform 0.2s;
+}
+/* Tema Poke (Poké Ball - vermelho) */
+body.poke .theme-toggle .pokebola-icon.selected {
+  transform: scale(1.1);
+  border: 5px solid; 
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #f44336, #d32f2f);
+  box-shadow: 0 0 20px 5px rgba(244, 67, 54, 0.9);
+  border-radius: 50%;
+}
+
+/* Tema Ultra (Ultra Ball - tom escuro/preto) */
+body.ultra .theme-toggle .pokebola-icon.selected {
+  transform: scale(1.1);
+  border: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #212121, #616161);
+  box-shadow: 0 0 20px 5px rgba(33, 33, 33, 0.9);
+  border-radius: 50%;
+}
+
+/* Tema Master (Master Ball - roxo) */
+body.master .theme-toggle .pokebola-icon.selected {
+  transform: scale(1.1);
+  border: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #9b4f96, #e535b0);
+  box-shadow: 0 0 20px 5px rgba(155, 79, 150, 0.9);
+  border-radius: 50%;
+}
+
+/* Tema Great (Great Ball - azul) */
+body.great .theme-toggle .pokebola-icon.selected {
+  transform: scale(1.1);
+  border: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #4f549b, #355ee5);
+  box-shadow: 0 0 20px 5px rgba(79, 84, 155, 0.9);
+  border-radius: 50%;
+}
+
+/* Tema GS (GS Ball - amarelo) */
+body.gs .theme-toggle .pokebola-icon.selected {
+  transform: scale(1.1);
+  border: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #f3e40d, #fbc02d);
+  box-shadow: 0 0 20px 5px rgba(243, 228, 13, 0.9);
+  border-radius: 50%;
+}
+
+
+
+.theme-toggle button:hover {
+  background: linear-gradient(145deg, #fff, #ccc);
+  transform: scale(1.1);
+}
+
+.pokedex-capa {
+  width: 200px; /* Define a largura para todos os ícones */
+  height: 100px; /* Define a altura para todos os ícones */
+  object-fit: contain; /* Mantém a proporção do ícone sem distorcer */
+}
+
+/* Define o tamanho das Pokébolas de temas, sem afetar outros ícones */
+.theme-pokebola {
+  width: 50px; /* Define a largura para todos os ícones */
+  height: 50px; /* Define a altura para todos os ícones */
+  object-fit: contain; /* Mantém a proporção do ícone sem distorcer */
+  cursor: pointer; /* Adiciona o cursor de ponteiro quando passar por cima */
+  margin: 0 5px; /* Espaço entre os ícones */
+}
+
+/* Efeito de hover para aumentar o tamanho das Pokébolas de tema */
+.theme-pokebola:hover {
+  transform: scale(1.1); /* Aumenta o ícone quando o mouse passa por cima */
+  transition: transform 0.2s ease; /* Anima a transição de tamanho */
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Ajuste para responsividade */
+}
+
+.roletaContainer {
+  width: 800px;
+  height: 600px;
+  background: white;
+  border-radius: 50%;
+  border: 10px solid #444;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  gap: 10px;
+  padding-right: 40px;
+  transition: background 0.3s;
+  justify-content: center;
+  opacity: 1; /* Inicialmente visível */
+  transition: opacity 0.5s;
+}
+
+body.ultra .roletaContainer {
+  background: #333; /* Escuro no tema escuro */
+}
+
+body.gs .roletaContainer {
+  background: #fff; /* Branca no tema claro */
+}
+
+body.poke .roletaContainer {
+  background: #d8615f; /* Vermelho no tema vermelho */
+}
+
+body.master .roletaContainer {
+  background:  #993399;
+}
+
+body.great .roletaContainer {
+  background: #80a4d3; /* Escuro no tema escuro */
+}
+
+.ponteiro {
+  position: absolute;
+  top: 25px;
+  left: 250px;
+  width: 30px;  /* Tamanho reduzido */
+  height: 20px;
+  background-color: #FFDC00;
+  border-radius: 15px 15px 0 0;
+  transform: translateX(-50%) rotate(180deg);
+  z-index: 9999; /* Valor bem alto */
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+
+/* Efeito hover para o ponteiro */
+.ponteiro:hover {
+  transform: translateX(-50%) rotate(180deg) scale(1.1); /* Leve aumento de tamanho no hover */
+  border-bottom-color: #FF9900; /* Altera para um tom mais forte de amarelo no hover */
+  box-shadow: 0 0 20px rgba(255, 255, 0, 1); /* Aumenta o brilho no hover */
+}
+#roleta {
+  position: absolute; 
+  top: 50%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: 1; /* Um z-index baixo para garantir que o ponteiro esteja acima */
+}
+
+.resultado {
+  text-align: center;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: -50px; /* Ajuste para alinhar melhor com a roleta */
+}
+
+.resultado p {
+  margin: 10px 0;
+  font-size: 28px;  /* Tamanho maior para o nome do Pokémon */
+  font-weight: bold; /* Trocando para negrito para melhorar a visibilidade */
+  text-align: center;
+  font-family: 'PokemonSolid', cursive; /* Usando a fonte "pokemon_solid" nos nomes dos Pokémon */
+  color: white;  /* Cor de texto branca */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6);  /* Sombra reduzida com contorno amarelo */
+}
+
+body.master {
+  background-color: #70014b; /* Cor roxa (base) */
+  color: #fff; /* Texto roxo master */
+}
+
+body.gs .resultado p {
+  color: yellow; /* Cor preta no tema claro */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px black; /* Contorno amarelo para visibilidade */
+}
+
+body.ultra .resultado p {
+  color: white; /* tema ultra */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6); /* Contorno amarelo para visibilidade */
+}
+
+body.great .resultado p {
+  color: white; /* tema azul great */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6); /* Contorno amarelo para visibilidade */
+}
+
+body.poke .resultado p {
+  color: white; /* tema vermelho poke*/
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6); /* Contorno amarelo para visibilidade */
+}
+
+/* Estilos específicos para o canvas da roleta */
+#roleta {
+  position: absolute; /* Pode ser 'absolute' ou 'relative', dependendo do seu layout */
+  top: 50%;  /* Centraliza verticalmente */
+  left: 32%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para centralizar exatamente */
+  width: 500px; /* Largura da roleta */
+  height: 500px; /* Altura da roleta */
+  border-radius: 50%; /* Faz o canvas ficar redondo, caso queira uma roleta circular */
+  z-index: 1; /* Garante que o canvas fique abaixo do ponteiro */
+}
+
+/* Ponteiro - tamanho fixo e ponta para cima inicialmente */
+.ponteiro-imagem {
+  position: absolute;
+  top: 25px;
+  left: 250px;  /* Centraliza o ponteiro no meio da roleta */
+  width: 80px;  /* Tamanho do ponteiro */
+  height: 65px; /* Tamanho do ponteiro */
+  z-index: 9999;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  /* Inicialmente, o ponteiro está apontando para cima */
+  transform: rotate(0deg);  /* Faz com que a ponta do ponteiro aponte para cima inicialmente */
+  animation: none;  /* Remove qualquer animação no início */
+}
+
+/* Vibração rápida (utilizada no começo do giro) */
+@keyframes vibrarRapido {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);  /* Vibração rápida para a direita */
+  }
+  100% {
+    transform: rotate(-5deg); /* Vibração rápida para a esquerda */
+  }
+}
+
+/* Vibração média (utilizada conforme o giro desacelera) */
+@keyframes vibrarMedio {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3deg);  /* Vibração média para a direita */
+  }
+  100% {
+    transform: rotate(-3deg); /* Vibração média para a esquerda */
+  }
+}
+
+/* Vibração lenta (final do giro) */
+@keyframes vibrarLento {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);  /* Vibração lenta para a direita */
+  }
+  100% {
+    transform: rotate(-2deg); /* Vibração lenta para a esquerda */
+  }
+}
+
+/* Vibração ultra lenta (final do giro - praticamente sem movimento) */
+@keyframes vibrarUltraLento {
+  0% {
+    transform: rotate(0deg);  /* Sem rotação inicial */
+  }
+  100% {
+    transform: rotate(0deg);  /* Final sem rotação */
+  }
+}
+
+
+
+
+
+/* Imagem do Pokémon (não será movida) */
+#imagemPokemon {
+  position: relative;  /* Deixe o posicionamento original */
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+  margin: 0;
+  display: block;
+  top: 20px;
+  left: 250px;
+  z-index: 1;  /* A imagem inicial fica atrás do ponteiro */
+}
+
+.pokebutton {
+  position: absolute;
+  bottom: 30px;  /* Ajuste a posição para que o botão fique na parte inferior da tela */
+  left: 0%;  /* Alinha o botão horizontalmente no centro */
+  transform: translateX(-50%); /* Centraliza o botão */
+  z-index: 9999; /* Garante que o botão fique acima de outros elementos */
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.pokebutton button {
+  width: 100px;  /* Ajuste o tamanho da Pokébola */
+  height: 100px; /* Ajuste o tamanho da Pokébola */
+  border: none;
+  background: url('imgs/pokebola.png') center center / cover no-repeat; /* Imagem da Pokébola */
+  cursor: pointer;
+  border-radius: 50%;  /* Faz com que o botão tenha bordas arredondadas (círculo) */
+  transition: transform 0.2s ease;  /* Para a animação suave de transformação */
+}
+
+.pokebutton button:hover {
+  transform: scale(1.1); /* Aumenta o tamanho quando o botão é pressionado */
+}
+
+
+body.master .pokebutton button:hover {
+  transform: scale(1.1);
+}
+
+.pokebutton img {
+  width: 30px;
+  height: 30px;
+}
+
+#girarButton {
+  font-family: 'Bungee', cursive; /* Mudando a fonte para Bungalo */
+  font-size: 25px;
+  padding: 12px 6px;
+  text-transform: uppercase;
+  background: linear-gradient(145deg, #800909, #e53935);
+  color: #fff;
+  border: black;
+  box-shadow: 2px 2px 8px rgba(201, 179, 179, 0.3);
+  margin: auto;
+}
+
+body.gs #girarButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #f9a825 0%,    /* Amarelo profundo no topo */
+    #fbc02d 25%,   /* Amarelo vibrante */
+    #f3e40d 45%,   /* Tom característico GS */
+    #f3e40d 50%,   /* Ponto fixo na metade */
+    #adadad 55%,   /* Amarelo claro para a transição */
+    #ffffff 100%   /* Base branca */
+  );
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1px #000;
+}
+
+
+body.ultra #girarButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #000000 0%,    /* Topo preto */
+    #424242 25%,   /* Transição para um cinza mais médio */
+    #616161 45%,   /* Cinza claro */
+    #616161 50%,   /* Ponto fixo na metade */
+    #9e9e9e 55%,   /* Mais claro para transição */
+    #ffffff 100%   /* Base branca */
+  );
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1px #000;
+}
+
+
+body.poke #girarButton {
+  width: 100px; /* ajuste conforme necessário */
+  height: 100px; /* ajuste conforme necessário */
+  border-radius: 50%;
+  /* Gradiente com múltiplas paradas para misturar tons de vermelho, cinza e branco */
+  background: linear-gradient(
+    to bottom,
+    #b71c1c 0%,   /* vermelho escuro (quase preto) */
+    #d32f2f 25%,  /* vermelho médio escuro */
+    #f44336 45%,  /* vermelho brilhante */
+    #f44336 50%,  /* fixo no meio para manter a identidade da poke ball */
+    #bbb6b6 55%,  /* transição para o cinza */
+    #fff 100%     /* branco puro na parte inferior */
+  );
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  
+  /* Texto com borda preta */
+  -webkit-text-stroke: 1px #000;
+  /* Você também pode usar a técnica de text-shadow para compatibilidade adicional:
+  text-shadow:
+    1px 1px 0 #000,
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+   -1px 1px 0 #000;
+  */
+}
+
+
+
+
+body.master #girarButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #4a148c 0%,    /* Roxo escuro no topo */
+    #6a1b9a 25%,   /* Variação intermediária */
+    #9b4f96 45%,   /* Roxo vibrante */
+    #9b4f96 50%,   /* Ponto fixo na metade */
+    #bbb6b6 55%,  /* transição para o cinza */
+    #fff 100%     /* branco puro na parte inferior */
+  );
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1px #000;
+}
+
+
+body.great #girarButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #0d47a1 0%,    /* Azul bem escuro no topo */
+    #1565c0 25%,   /* Azul médio */
+    #4f549b 45%,   /* Azul característico */
+    #4f549b 50%,   /* Ponto fixo na metade */
+    #bbb6b6 55%,  /* transição para o cinza */
+    #fff 100%     /* branco puro na parte inferior */
+  );
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1px #000;
+}
+
+
+#girarButton:hover {
+  transform: scale(1.1);
+}
+
+.pokedex {
+  width: 360px;
+  height: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 4px #333;
+  transition: background 0.3s, border 0.3s;
+  border: 5px solid #c62828; /* Borda metálica */
+  background: linear-gradient(135deg, #f0f000, #ffd700); /* Amarelo no tema claro */
+}
+
+body.ultra .pokedex {
+  background: linear-gradient(135deg, #c4c2c3, #585858); /* Gradiente roxo para rosa */
+  border: 5px solid #444;
+  color: white;
+}
+
+body.gs .pokedex {
+  background: linear-gradient(135deg, #c4c2c3, #585858); /* Gradiente roxo para rosa */
+  border: 5px solid #444;
+  color: white;
+}
+
+body.poke .pokedex {
+  background: linear-gradient(135deg, #c4c2c3, #585858); /* Gradiente roxo para rosa */
+  border: 5px solid #c62828;
+  color: white;
+}
+
+body.master .pokedex {
+  background: linear-gradient(135deg, #c4c2c3, #585858); /* Gradiente roxo para rosa */
+  border: 5px solid black;
+  color: white;
+}
+
+body.great .pokedex {
+  background: linear-gradient(135deg, #c4c2c3, #585858); /* Gradiente roxo para rosa */
+  border: 5px solid #9b4f96;
+  color: white;
+}
+
+/* Altera a cor do fundo da tela do pokédex */
+body.ultra .pokedex-screen {
+  background: #555; /* Fundo mais escuro no tema escuro */
+  color: white;
+}
+
+body.gs .pokedex-screen {
+  background: #e6d059; /* Fundo branco no tema claro */
+  color: black;
+}
+
+body.poke .pokedex-screen {
+  background: #f44336; /* Fundo vermelho no tema vermelho */
+  color: white;
+}
+
+body.great .pokedex-screen {
+  background: #80a4d3; /* Fundo azul  */
+  color: white;
+}
+
+body.master .pokedex-screen {
+  background: #993399;
+  color: white;
+}
+
+.pokedex-screen {
+  background: #333;
+  border: 4px inset #b0b0b0;
+  border-radius: 10px;
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Bungee', cursive; /* Aplicando a fonte Bungalo */
+}
+
+.pokedex-screen h2 {
+  margin-bottom: 20px;
+  font-size: 32px; /* Tamanho maior para o título */
+  font-weight: bold;
+  text-align: center;
+  font-family: 'PokemonHollow', cursive; /* Usando a fonte "pokemon_hollow" no título */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px rgb(255, 255, 255); /* Contorno branco na frase "Como Usar" */
+}
+
+.pokedex-screen h2::after {
+  content: " ❓"; /* Interrogação */
+  font-size: 32px;  /* Aumentando o tamanho da interrogação */
+}
+
+.pokedex-screen p {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pokebola-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  display: block;
+  
+}
+#nomePokemon {
+  position: fixed;  /* Posiciona o nome de forma absoluta */
+  bottom: 50px;  /* Coloca o nome na parte inferior da imagem */
+  width: 100%;
+  right: 10px;  /* Adicionado o ponto e vírgula aqui */
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6);  /* Sombra no texto */
+}
