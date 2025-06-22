@@ -297,7 +297,7 @@ body.poke .resultado p {
 .ponteiro-imagem {
   position: absolute;
   top: 25px;
-  left: 250px;  /* Centraliza o ponteiro no meio da roleta */
+  left: 190px;  /* Centraliza o ponteiro no meio da roleta */
   width: 80px;  /* Tamanho do ponteiro */
   height: 65px; /* Tamanho do ponteiro */
   z-index: 9999;
@@ -647,13 +647,3 @@ body.master .pokedex-screen {
   margin: 0 auto;
   display: block;
   
-}
-#nomePokemon {
-  position: absolut;  /* Posiciona o nome de forma absoluta */
-  bottom: 50px;  /* Coloca o nome na parte inferior da imagem */
-  width: 100%;
-  right: 10px;  /* Adicionado o ponto e vírgula aqui */
-  font-size: 28px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6);  /* Sombra no texto */
-}
