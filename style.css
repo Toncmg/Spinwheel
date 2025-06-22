@@ -649,12 +649,11 @@ body.master .pokedex-screen {
   
 }
 #nomePokemon {
-  margin: 10px 0;
+  position: fixed;  /* Posiciona o nome de forma absoluta */
+  bottom: 50px;  /* Coloca o nome na parte inferior da imagem */
+  width: 100%;
+  right: 10px;  /* Adicionado o ponto e vírgula aqui */
   font-size: 28px;
   font-weight: bold;
-  font-family: 'PokemonSolid', cursive;
-  color: white;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.6);  /* Sombra no texto */
 }
-
