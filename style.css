@@ -649,7 +649,7 @@ body.master .pokedex-screen {
   
 }
 #nomePokemon {
-  position: fixed;  /* Posiciona o nome de forma absoluta */
+  position: absolut;  /* Posiciona o nome de forma absoluta */
   bottom: 50px;  /* Coloca o nome na parte inferior da imagem */
   width: 100%;
   right: 10px;  /* Adicionado o ponto e vírgula aqui */
